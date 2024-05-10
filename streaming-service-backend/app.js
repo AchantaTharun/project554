@@ -103,13 +103,13 @@ try {
     useNewUrlParser: true,
   });
 
-  await redisClient
-    .connect()
-    .then(() => {})
-    .catch((error) => {
-      throw new Error(`Redis Client failed to connect`);
-    });
-    redisClient.flushDb();
+  // await redisClient
+  //   .connect()
+  //   .then(() => {})
+  //   .catch((error) => {
+  //     throw new Error(`Redis Client failed to connect`);
+  //   });
+    //redisClient.flushDb();
   if (connection) {
     await server.start();
 
