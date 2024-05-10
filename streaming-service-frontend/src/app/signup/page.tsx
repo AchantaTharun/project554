@@ -211,7 +211,7 @@ const Signup: React.FC = () => {
                   {...register('displayName', {
                     required: 'Display name is required',
                     pattern: {
-                      value: /^[a-zA-Z0-9]*$/,
+                      value: /^[a-zA-Z0-9 ]*$/                      ,
                       message: 'Must contain only letters and numbers',
                     },
                     minLength: {

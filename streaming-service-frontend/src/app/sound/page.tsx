@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import Card from "@/components/App/Feed/Card";
 import InfiniteCarousel from "@/components/App/Feed/InfiniteCarousel";
 import { useDispatch } from "react-redux";
-import { playSong } from "@/utils/redux/features/song/songSlice";
+import { playSong, setNextSongs } from "@/utils/redux/features/song/songSlice";
 import createApolloClient from "@/utils";
 import { FeedQuery } from "@/utils/graphql/queries";
 import { FeedQueryResult } from "@/utils/graphql/resultTypes";
@@ -14,7 +14,8 @@ import { useRouter } from "next/navigation";
 import SkeletonLoader from "@/components/App/SkeletonLoader";
 import { useSelector } from "react-redux";
 import { RootState } from "@/utils/redux/store";
-
+import { useLazyQuery } from "@apollo/client";
+import queries from "@/utils/queries";
 // TODO: FIX INFINITE CAROUSEL
 
 const Home: React.FC = () => {
@@ -61,7 +62,18 @@ const Home: React.FC = () => {
     fetchMostLikedSongsAndArtists();
   }, []);
 
+  const [getNextSongs, { data: nextSongsData }] = useLazyQuery(
+    queries.GET_NEXT_SONGS
+  );
+
+  useEffect(() => {
+    if (nextSongsData && nextSongsData.getNextSongs) {
+      dispatch(setNextSongs(nextSongsData.getNextSongs));
+    }
+  }, [nextSongsData]);
+
   const handleSongClick = (songId: string) => {
+    getNextSongs({ variables: { clickedSongId: songId } });
     const clickedSong = mostLikedSongs.find((song) => song._id === songId) || newlyReleasedSongs.find((song) => song._id === songId);;
     if (clickedSong) {
       dispatch(playSong({ song: clickedSong, currentTime: 0 }));

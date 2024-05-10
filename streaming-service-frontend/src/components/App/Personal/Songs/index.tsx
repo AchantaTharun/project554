@@ -64,7 +64,7 @@ const Songs: React.FC = () => {
             >
               <img
                 src={
-                  song.album.cover_image_url
+                  song && song.album && song.album.cover_image_url
                     ? getImageUrl(song.album.cover_image_url)
                     : "/img/music_note.jpeg"
                 }

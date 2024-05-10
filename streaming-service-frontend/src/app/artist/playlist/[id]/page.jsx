@@ -8,7 +8,7 @@ import { AddSong } from "@/components/App/playlist/AddSong";
 import { useMutation } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { playSong } from "@/utils/redux/features/song/songSlice";
-
+import { useSelector } from "react-redux";
 export default function Playlist({ params }) {
   const { token } = useSelector((state) => state.user);
   const apolloClient = createApolloClient(token);

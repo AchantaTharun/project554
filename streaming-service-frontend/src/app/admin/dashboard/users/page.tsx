@@ -102,9 +102,9 @@ const AdminDashboardUsers: React.FC = () => {
     );
   }
 
-  if (error) {
-    return <div>Error: {error?.message}</div>
-  }
+  // if (error) {
+  //   return <div>Error: {error?.message}</div>
+  // }
 
   const handleModal = (userId: string, userName: string) => {
     setUserId(userId);

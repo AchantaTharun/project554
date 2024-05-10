@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { playSong } from "@/utils/redux/features/song/songSlice";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
 export default function Playlist({ params }) {
   const { token } = useSelector((state) => state.user);

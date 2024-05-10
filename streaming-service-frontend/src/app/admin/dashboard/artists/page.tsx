@@ -102,9 +102,6 @@ const AdminDashboardArtists: React.FC = () => {
     );
   }
 
-  if (error) {
-    return <div>Error: {error?.message}</div>
-  }
 
   const handleModal = (artistId: string, artistName: string) => {
     setArtistId(artistId);
